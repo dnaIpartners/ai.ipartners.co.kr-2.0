@@ -31,10 +31,10 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, isDark = false }) => {
   }, []);
 
   const navItems = [
-    { name: 'WORKS', page: 'works' },
-    { name: 'KNOWLEDGE', page: 'knowledge' },
     { name: 'RECIPE', page: 'recipe' },
+    { name: 'WORKS', page: 'works' },
     { name: 'INSIGHTS NEWS', page: 'insights-news' },
+    { name: 'KNOWLEDGE', page: 'knowledge' },
     { name: 'ABOUTS', page: 'about' }
   ];
 
