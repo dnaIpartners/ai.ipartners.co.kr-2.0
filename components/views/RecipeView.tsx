@@ -202,8 +202,8 @@ const RecipeView: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-6 text-white"
           >
-            Website Construction <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-emerald-400">on Autopilot.</span>
+           단순 보조를 넘어, <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-emerald-400">지능형 에이전트가 완성하는 구축 파이프라인. </span>
           </motion.h1>
           
           <motion.p 
