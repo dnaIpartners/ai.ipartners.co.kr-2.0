@@ -99,27 +99,27 @@ const RecipeNode = ({ data }: { data: { phase: typeof phases[0] } }) => {
   const Icon = phase.icon;
   
   return (
-    <div className={`w-[700px] bg-[#0B0C10] border-2 ${phase.borderColor} rounded-2xl shadow-2xl overflow-hidden group hover:border-opacity-100 transition-colors duration-500`}>
+    <div className={`w-[630px] bg-[#0B0C10] border-2 ${phase.borderColor} rounded-2xl shadow-2xl overflow-hidden group hover:border-opacity-100 transition-colors duration-500`}>
       <Handle type="target" position={Position.Top} className="w-4 h-4 bg-[#0a0a0a] border-2 border-gray-500" />
       
       {/* Card Header (Terminal Style) */}
-      <div className={`px-8 py-6 border-b-2 ${phase.borderColor} bg-white/[0.02] flex items-center justify-between`}>
-        <div className="flex items-center gap-6">
-          <Icon className={`w-8 h-8 ${phase.color}`} />
-          <span className="text-xl font-mono text-gray-300 tracking-wider font-semibold">{phase.title}</span>
+      <div className={`px-7 py-5 border-b-2 ${phase.borderColor} bg-white/[0.02] flex items-center justify-between`}>
+        <div className="flex items-center gap-5">
+          <Icon className={`w-7 h-7 ${phase.color}`} />
+          <span className="text-lg font-mono text-gray-300 tracking-wider font-semibold">{phase.title}</span>
         </div>
-        <span className={`text-sm font-mono px-4 py-1 rounded bg-white/5 ${phase.color} border ${phase.borderColor}`}>
+        <span className={`text-xs font-mono px-3 py-1 rounded bg-white/5 ${phase.color} border ${phase.borderColor}`}>
           {phase.tag}
         </span>
       </div>
       
       {/* Card Body */}
-      <div className="p-10 md:p-12">
-        <h4 className={`text-3xl font-bold mb-4 text-white group-hover:${phase.color} transition-colors duration-300`}>{phase.subtitle}</h4>
-        <p className="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed">{phase.description}</p>
+      <div className="p-9 md:p-10">
+        <h4 className={`text-2xl font-bold mb-4 text-white group-hover:${phase.color} transition-colors duration-300`}>{phase.subtitle}</h4>
+        <p className="text-base md:text-lg text-gray-400 mb-8 leading-relaxed">{phase.description}</p>
         
         {/* Terminal/Tasks Block */}
-        <div className="bg-[#050505] border border-white/5 rounded-xl p-8 font-mono text-lg space-y-5 relative overflow-hidden">
+        <div className="bg-[#050505] border border-white/5 rounded-xl p-7 font-mono text-base space-y-4 relative overflow-hidden">
           {/* Subtle background glow in terminal */}
           <div className="absolute inset-0 opacity-10" style={{ background: `radial-gradient(circle at top right, ${phase.glow}, transparent 70%)` }} />
           
@@ -147,8 +147,8 @@ const initialNodes: Node[] = phases.map((phase, index) => {
     id: phase.id,
     type: 'recipeNode',
     position: { 
-      x: isEven ? 100 : 900, 
-      y: index * 500 
+      x: isEven ? 50 : 650, 
+      y: index * 600 
     },
     data: { phase },
   };
@@ -163,10 +163,10 @@ const initialEdges: Edge[] = phases.slice(0, -1).map((phase, index) => {
     animated: true,
     label: phase.lineLabel,
     style: { stroke: phase.hexColor, strokeWidth: 2, strokeDasharray: '5 5' },
-    labelStyle: { fill: phase.hexColor, fontWeight: 700, fontSize: 10, fontFamily: 'monospace', letterSpacing: '0.05em' },
-    labelBgStyle: { fill: '#0a0a0a', stroke: phase.hexColor, strokeWidth: 1, fillOpacity: 1 },
-    labelBgPadding: [8, 4],
-    labelBgBorderRadius: 4,
+    labelStyle: { fill: phase.hexColor, fontWeight: 700, fontSize: 27, fontFamily: 'monospace', letterSpacing: '0.05em' },
+    labelBgStyle: { fill: '#0a0a0a', stroke: phase.hexColor, strokeWidth: 2, fillOpacity: 1 },
+    labelBgPadding: [14, 7],
+    labelBgBorderRadius: 7,
   };
 });
 
@@ -219,7 +219,7 @@ const RecipeView: React.FC = () => {
       </div>
 
       {/* React Flow Canvas */}
-      <div className="flex-grow w-full relative z-20" style={{ height: '800px' }}>
+      <div className="flex-grow w-full relative z-20" style={{ height: '1600px' }}>
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -227,14 +227,19 @@ const RecipeView: React.FC = () => {
           onEdgesChange={onEdgesChange}
           nodeTypes={nodeTypes}
           fitView
-          fitViewOptions={{ padding: 0.2 }}
+          fitViewOptions={{ padding: 0.1 }}
           minZoom={0.2}
           maxZoom={1.5}
+          zoomOnScroll={false}
+          zoomOnPinch={false}
+          zoomOnDoubleClick={false}
+          panOnDrag={false}
+          panOnScroll={false}
+          preventScrolling={false}
           className="bg-transparent"
           colorMode="dark"
         >
           <Background color="#333" gap={20} size={1} />
-          <Controls className="bg-[#0a0a0a] border-white/10 fill-white" />
         </ReactFlow>
       </div>
     </div>
