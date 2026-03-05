@@ -36,7 +36,7 @@ const QuestionsAnswersSection: React.FC = () => {
   };
 
   return (
-    <section className="py-32 px-6 bg-[#f9fafb] text-black border-t border-gray-100">
+    <section className="py-24 md:py-32 px-6 bg-[#f9fafb] text-black border-t border-gray-100">
       <div className="max-w-4xl mx-auto text-center">
         <div className="mb-6">
           <span className="text-[10px] font-bold text-blue-600 tracking-widest uppercase mb-4 block">

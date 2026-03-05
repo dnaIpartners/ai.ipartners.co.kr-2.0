@@ -12,9 +12,10 @@ import WorksView from './components/views/WorksView';
 import ProjectDetailView from './components/views/ProjectDetailView';
 import KnowledgeBoardView, { BoardPost } from './components/views/KnowledgeBoardView';
 import InsightsNewsView, { NewsPost } from './components/views/InsightsNewsView';
+import RecipeView from './components/views/RecipeView';
 import { Project } from './types';
 
-type PageType = 'home' | 'about' | 'works' | 'project-detail' | 'prompt-library' | 'ai-training' | 'ui-ux-prompt' | 'all-services' | 'insights-news';
+type PageType = 'home' | 'about' | 'works' | 'project-detail' | 'prompt-library' | 'ai-training' | 'ui-ux-prompt' | 'all-services' | 'insights-news' | 'recipe';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<PageType>('home');
@@ -49,7 +50,7 @@ const App: React.FC = () => {
   };
 
   // Determine if the current page has a dark background to adjust Navbar color
-  const isDarkPage = currentPage === 'project-detail' || currentPage === 'about';
+  const isDarkPage = currentPage === 'project-detail' || currentPage === 'about' || currentPage === 'recipe';
 
   // Helper to generate back button label based on previous page
   const getBackLabel = (page: PageType) => {
@@ -221,6 +222,10 @@ const App: React.FC = () => {
 
         {currentPage === 'insights-news' && (
           <InsightsNewsView posts={insightsNewsPosts} />
+        )}
+
+        {currentPage === 'recipe' && (
+          <RecipeView />
         )}
       </div>
 

@@ -13,125 +13,6 @@ const AnimatedChar = ({ char, progress, range }: { char: string, progress: Motio
   );
 };
 
-const capabilities = [
-  {
-    id: '01',
-    title: 'AI Transformation',
-    description: '기업의 비즈니스 모델과 내부 프로세스에 최신 AI 기술을 완벽히 내재화합니다. 비효율적인 반복 작업을 제거하고, 지능형 워크플로우를 구축하여 압도적인 생산성 향상과 비즈니스 혁신을 이끌어냅니다.',
-    services: ['AI 도입 컨설팅', '지능형 워크플로우 구축', '업무 자동화 (RPA)', 'AI 기반 서비스 기획']
-  }
-];
-
-// Reusable trendy AI diagram component
-const AITrendyDiagram = () => {
-  return (
-    <div className="relative w-full aspect-square max-w-[500px] mx-auto flex items-center justify-center">
-      {/* Ambient Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,51,255,0.15)_0%,transparent_60%)] blur-2xl pointer-events-none"></div>
-
-      <svg viewBox="0 0 400 400" className="w-full h-full text-white/30 overflow-visible">
-        {/* Grid background */}
-        <defs>
-          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1"/>
-          </pattern>
-          <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#0033FF" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0.1" />
-          </linearGradient>
-        </defs>
-        <rect width="400" height="400" fill="url(#grid)" />
-
-        {/* Connecting Lines */}
-        <motion.path
-          d="M 200 200 L 100 100 M 200 200 L 320 120 M 200 200 L 280 300 M 200 200 L 80 280 M 100 100 L 320 120 M 320 120 L 280 300 M 280 300 L 80 280 M 80 280 L 100 100"
-          fill="none"
-          stroke="url(#lineGrad)"
-          strokeWidth="1.5"
-          initial={{ pathLength: 0, opacity: 0 }}
-          whileInView={{ pathLength: 1, opacity: 1 }}
-          viewport={{ once: false, margin: "-100px" }}
-          transition={{ duration: 2, ease: "easeInOut" }}
-        />
-
-        {/* Orbiting dashed circle */}
-        <motion.circle
-          cx="200" cy="200" r="140"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeDasharray="4 12"
-          initial={{ rotate: 0, opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          animate={{ rotate: 360 }}
-          viewport={{ once: false }}
-          transition={{ 
-            opacity: { duration: 2 },
-            rotate: { duration: 40, repeat: Infinity, ease: "linear" }
-          }}
-          style={{ transformOrigin: "200px 200px" }}
-        />
-
-        {/* Nodes */}
-        {[
-          { cx: 200, cy: 200, r: 8, delay: 0 }, // Center
-          { cx: 100, cy: 100, r: 5, delay: 0.5 },
-          { cx: 320, cy: 120, r: 6, delay: 0.7 },
-          { cx: 280, cy: 300, r: 5, delay: 0.9 },
-          { cx: 80, cy: 280, r: 6, delay: 1.1 },
-        ].map((node, i) => (
-          <motion.circle
-            key={i}
-            cx={node.cx} cy={node.cy} r={node.r}
-            fill={i === 0 ? "#0033FF" : "white"}
-            className={i === 0 ? "drop-shadow-[0_0_15px_rgba(0,51,255,0.8)]" : "drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]"}
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: false, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: node.delay, type: "spring" }}
-          />
-        ))}
-
-        {/* Data particles moving along lines */}
-        <circle r="2" fill="#0033FF" className="drop-shadow-[0_0_5px_#0033FF]">
-          <animateMotion dur="3s" repeatCount="indefinite" path="M 100 100 L 200 200" />
-        </circle>
-        <circle r="2" fill="#0033FF" className="drop-shadow-[0_0_5px_#0033FF]">
-          <animateMotion dur="4s" repeatCount="indefinite" path="M 320 120 L 200 200" />
-        </circle>
-        <circle r="2" fill="#0033FF" className="drop-shadow-[0_0_5px_#0033FF]">
-          <animateMotion dur="3.5s" repeatCount="indefinite" path="M 280 300 L 200 200" />
-        </circle>
-        <circle r="2" fill="#0033FF" className="drop-shadow-[0_0_5px_#0033FF]">
-          <animateMotion dur="4.5s" repeatCount="indefinite" path="M 80 280 L 200 200" />
-        </circle>
-      </svg>
-
-      {/* Floating Glassmorphic Labels */}
-      <FloatingLabel text="Data Processing" top="15%" left="5%" delay={1} />
-      <FloatingLabel text="Machine Learning" top="20%" right="0%" delay={1.2} />
-      <FloatingLabel text="Automation" bottom="15%" right="10%" delay={1.4} />
-      <FloatingLabel text="Insight" bottom="20%" left="0%" delay={1.6} />
-    </div>
-  );
-};
-
-const FloatingLabel = ({ text, top, left, right, bottom, delay }: { text: string, top?: string, left?: string, right?: string, bottom?: string, delay: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 10 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: false }}
-    transition={{ duration: 0.8, delay }}
-    className="absolute px-3 py-1.5 rounded-md border border-white/10 bg-white/5 backdrop-blur-md text-[10px] font-mono text-white/80 tracking-wider"
-    style={{ top, left, right, bottom }}
-  >
-    <div className="flex items-center gap-2">
-      <div className="w-1.5 h-1.5 rounded-full bg-[#0033FF] animate-pulse"></div>
-      {text}
-    </div>
-  </motion.div>
-);
-
 const AboutView: React.FC = () => {
   const textRef = useRef<HTMLHeadingElement>(null);
   const { scrollYProgress } = useScroll({
@@ -201,56 +82,148 @@ const AboutView: React.FC = () => {
         </div>
       </section>
 
-      {/* --- CAPABILITIES SECTION (Dark Theme with Diagrams) --- */}
+      {/* --- BUSINESS AREAS: DX to AX SECTION --- */}
       <section className="bg-black/60 backdrop-blur-md text-white relative z-10 py-32">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="mb-32">
-            <h3 className="text-sm font-bold tracking-[0.2em] text-[#0033FF] uppercase mb-4">Business Areas</h3>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-white">Capabilities</h2>
+          <div className="mb-24 text-center md:text-left">
+            <h3 className="text-sm font-bold tracking-[0.2em] text-[#0033FF] uppercase mb-4">Our Vision</h3>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-white mb-6">
+              From <span className="text-gray-500">Web Agency</span> to <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00A3FF] to-[#0033FF]">AI Partner</span>
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl break-keep font-light">
+              단순히 웹과 앱을 '구축'하던 디지털 에이전시(DX)를 넘어, 고객의 비즈니스에 지능을 불어넣는 <strong className="text-white font-medium">AI 파트너(AX)</strong>로 도약합니다.
+            </p>
           </div>
 
-          <div className="flex flex-col space-y-48">
-            {capabilities.map((cap, index) => (
+          <div className="relative flex flex-col lg:flex-row items-stretch justify-between gap-8 lg:gap-0">
+            
+            {/* DX Card (Past/Present) */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="w-full lg:w-[42%] bg-white/5 border border-white/10 rounded-3xl p-10 relative overflow-hidden group"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gray-600"></div>
+              <div className="relative z-10">
+                <div className="text-gray-500 font-mono text-sm mb-4 tracking-widest">DX : DIGITAL TRANSFORMATION</div>
+                <h3 className="text-3xl font-bold mb-6 text-gray-300">구축 중심의 에이전시</h3>
+                <p className="text-gray-400 mb-10 leading-relaxed font-light break-keep h-24">
+                  오프라인 비즈니스를 온라인으로 옮기고, 사용자가 접근하기 쉬운 플랫폼을 만드는 인프라 중심의 디지털 전환 단계입니다.
+                </p>
+                
+                <div className="space-y-4">
+                  {[
+                    { title: 'Web & App Platform', desc: '반응형 웹 및 모바일 앱 구축' },
+                    { title: 'UI/UX Optimization', desc: '사용자 편의성 중심의 인터페이스 설계' },
+                    { title: 'System Integration', desc: '레거시 시스템 연동 및 데이터 수집' }
+                  ].map((item, i) => (
+                    <div key={i} className="flex flex-col gap-1 border-b border-white/5 pb-4 last:border-0">
+                      <div className="flex items-center gap-3 text-gray-300 font-medium">
+                        <div className="w-1.5 h-1.5 rounded-full bg-gray-500"></div>
+                        {item.title}
+                      </div>
+                      <div className="pl-4 text-sm text-gray-500">{item.desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Transformation Bridge (Desktop Only) */}
+            <div className="hidden lg:flex w-[16%] relative items-center justify-center">
+              {/* Connecting Line */}
+              <div className="absolute w-full h-0.5 bg-gradient-to-r from-gray-600 via-[#0033FF] to-[#00A3FF]"></div>
+              {/* Flowing Particles */}
               <motion.div 
-                key={cap.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: "-10%" }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-16 lg:gap-24 items-center`}
+                animate={{ x: [-50, 50], opacity: [0, 1, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                className="absolute w-2 h-2 rounded-full bg-white shadow-[0_0_10px_white] z-10"
+              />
+              {/* Center Node */}
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className="relative z-20 w-20 h-20 rounded-full bg-black border border-[#0033FF]/50 flex items-center justify-center shadow-[0_0_30px_rgba(0,51,255,0.2)] backdrop-blur-md"
               >
-                {/* Left: Animated Diagram */}
-                <div className="w-full lg:w-1/2">
-                  <AITrendyDiagram />
-                </div>
-
-                {/* Right: Text Content */}
-                <div className="w-full lg:w-1/2 flex flex-col justify-center relative">
-                  {/* Subtle warm glow behind text */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle_at_center,rgba(255,100,0,0.08)_0%,transparent_60%)] pointer-events-none -z-10 blur-3xl"></div>
-                  
-                  <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-8">
-                    {cap.title}
-                  </h3>
-                  <p className="text-gray-400 leading-relaxed break-keep text-lg md:text-xl mb-10 font-light">
-                    {cap.description}
-                  </p>
-                  
-                  {/* Pills/Tags */}
-                  <div className="flex flex-wrap gap-3">
-                    {cap.services.map((service, sIdx) => (
-                      <span 
-                        key={sIdx} 
-                        className="px-5 py-2.5 rounded-full border border-white/20 text-sm text-gray-300 font-medium tracking-wide bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-white/40 transition-colors"
-                      >
-                        {service}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                <span className="font-black text-xl text-transparent bg-clip-text bg-gradient-to-br from-[#00A3FF] to-[#0033FF]">i-PIE</span>
               </motion.div>
-            ))}
+            </div>
+
+            {/* Mobile Bridge (Arrow) */}
+            <div className="flex lg:hidden justify-center py-4">
+               <ArrowRight className="w-8 h-8 text-[#0033FF] rotate-90" />
+            </div>
+
+            {/* AX Card (Future) */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="w-full lg:w-[42%] bg-gradient-to-br from-[#001641]/80 to-black border border-[#0033FF]/30 rounded-3xl p-10 relative overflow-hidden group shadow-[0_0_40px_rgba(0,51,255,0.1)]"
+            >
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#0033FF]/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-[#0033FF]/30 transition-colors duration-500"></div>
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0033FF] to-[#00A3FF]"></div>
+              
+              <div className="relative z-10">
+                <div className="text-[#00A3FF] font-mono text-sm mb-4 tracking-widest flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00A3FF] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00A3FF]"></span>
+                  </span>
+                  AX : AI TRANSFORMATION
+                </div>
+                <h3 className="text-3xl font-bold mb-6 text-white">지능형 경험 에이전시</h3>
+                <p className="text-gray-300 mb-10 leading-relaxed font-light break-keep h-24">
+                  AI가 스스로 데이터를 분석하고 콘텐츠를 생성하며, 사용자에게 초개인화된 예측형 디지털 경험을 제공하는 지능형 전환 단계입니다.
+                </p>
+                
+                <div className="space-y-4">
+                  {[
+                    { title: 'AI-Driven UX/UI', desc: '사용자 행동 예측 및 초개인화된 맞춤형 인터페이스' },
+                    { title: 'Generative Content', desc: '생성형 AI 기반의 텍스트, 이미지 등 동적 콘텐츠 생성' },
+                    { title: 'Intelligent Agent', desc: '자율적으로 고객과 상호작용하는 AI 에이전트 연동' }
+                  ].map((item, i) => (
+                    <div key={i} className="flex flex-col gap-1 border-b border-[#0033FF]/20 pb-4 last:border-0">
+                      <div className="flex items-center gap-3 text-white font-medium">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#00A3FF] shadow-[0_0_8px_#00A3FF]"></div>
+                        {item.title}
+                      </div>
+                      <div className="pl-4 text-sm text-gray-400">{item.desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
           </div>
+          
+          {/* Bottom Summary / Services */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-24 pt-16 border-t border-white/10"
+          >
+            <h4 className="text-2xl font-bold mb-10 text-center">아이파트너즈의 핵심 AX 서비스</h4>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              {[
+                { title: 'AI Service Planning', desc: '비즈니스 목표에 맞춘 AI 서비스 기획 및 도입 컨설팅' },
+                { title: 'Intelligent Platform', desc: 'LLM 및 AI 에이전트가 결합된 지능형 웹/앱 플랫폼 구축' },
+                { title: 'AI Design System', desc: '데이터 기반으로 최적화되는 동적 AI 디자인 시스템 설계' },
+                { title: 'Workflow Automation', desc: '내부 업무 효율을 극대화하는 AI 기반 자동화 워크플로우' }
+              ].map((service, i) => (
+                <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-[#0033FF]/50 transition-all duration-300 cursor-pointer group flex flex-col h-full">
+                  <div className="w-10 h-10 rounded-full bg-black/50 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                    <div className="w-2 h-2 rounded-full bg-[#0033FF] group-hover:shadow-[0_0_10px_#0033FF]"></div>
+                  </div>
+                  <h5 className="text-lg font-bold mb-3 text-white">{service.title}</h5>
+                  <p className="text-sm text-gray-400 font-light break-keep mt-auto">{service.desc}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 

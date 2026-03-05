@@ -35,7 +35,7 @@ export default function KnowledgeHub() {
   });
 
   return (
-    <section className="pt-24 md:pt-32 pb-20 md:pb-24 bg-white overflow-hidden relative">
+    <section className="py-24 md:py-32 bg-white overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center justify-center gap-16">
           
